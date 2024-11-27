@@ -37,9 +37,16 @@
     }
 
     .resleting .zip {
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 1s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #000;
+  z-index: 1;
+  transform: scaleY(0); /* Dimulai dengan tertutup */
+  transform-origin: top;
+  transition: transform 1.5s ease-in-out; /* Transisi halus */
 }
 
     .content {
@@ -129,18 +136,22 @@
 
     // Tombol Mulai untuk memutar musik dan menampilkan animasi love
     document.getElementById('mulai-btn').addEventListener('click', function () {
-    const section = document.querySelector('#section');
-    const zip = section.querySelector('.zip');
+  const section = document.querySelector('#section');
+  const zip = section.querySelector('.zip');
 
-    // GSAP untuk efek resleting
-    gsap.to(zip, {
-        duration: 1,
-        scaleY: 1,
-        ease: "power2.inOut",
-        onComplete: () => {
-            section.querySelector('.content').classList.add('visible');
-        },
-    });
+  // Animasi resleting menggunakan GSAP
+  gsap.to(zip, {
+    duration: 1.5,
+    scaleY: 1,
+    ease: "power2.inOut", // Gunakan easing untuk efek halus
+    onComplete: () => {
+      section.querySelector('.content').classList.add('visible'); // Menampilkan konten
+    },
+  });
+
+  // Mulai musik
+  const birthdayMusic = document.getElementById('birthdayMusic');
+  birthdayMusic.play();
 });
 
       // Buat animasi love
