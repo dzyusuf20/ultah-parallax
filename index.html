@@ -164,6 +164,22 @@
         gsap.from(card, { duration: 1, scale: 0, ease: 'bounce' });
       });
     });
+
+    // Animasi Resleting
+document.getElementById('mulai-btn').addEventListener('click', function () {
+  const section = document.querySelector('#section');
+  const zip = section.querySelector('.zip');
+
+  // Animasi resleting
+  gsap.to(zip, {
+    duration: 1,
+    scaleY: 1,
+    onComplete: () => {
+      section.querySelector('.content').classList.add('visible');
+    },
+  });
+});
+
   </script>
 </body>
 </html>
