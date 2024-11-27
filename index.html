@@ -36,9 +36,11 @@
       transition: transform 1s ease-in-out;
     }
 
-    .resleting.open .zip {
-      transform: scaleY(1);
-    }
+    .resleting .zip {
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s ease-in-out;
+}
 
     .content {
       position: relative;
@@ -66,9 +68,13 @@
       </header>
       
 
-  <section id="section" class="py-16 bg-gradient-to-r from-pink-500 to-purple-500 resleting">
-    <div class="zip"></div>
-    <div class="content">
+      <section id="section" class="py-16 bg-gradient-to-r from-pink-500 to-purple-500 resleting">
+        <div class="zip"></div>
+        <div class="content">
+            <!-- Konten Anda -->
+        </div>
+    </section>
+    
       <h2 class="text-4xl font-extrabold text-white mb-6">Kartu Tarot Kamu</h2>
       <p class="text-lg text-white">Klik untuk membuka kartu dan temukan kata-kata spesial</p>
     </div>
@@ -122,16 +128,20 @@
     }
 
     // Tombol Mulai untuk memutar musik dan menampilkan animasi love
-    document.getElementById('mulai-btn').addEventListener('click', function (event) {
-      const audio = document.getElementById('birthdayMusic');
-      audio.play()
-        .then(() => {
-          console.log('Musik berhasil diputar');
-        })
-        .catch((error) => {
-          console.error('Gagal memutar musik:', error);
-          alert('Klik tombol lagi jika musik tidak berputar!');
-        });
+    document.getElementById('mulai-btn').addEventListener('click', function () {
+    const section = document.querySelector('#section');
+    const zip = section.querySelector('.zip');
+
+    // GSAP untuk efek resleting
+    gsap.to(zip, {
+        duration: 1,
+        scaleY: 1,
+        ease: "power2.inOut",
+        onComplete: () => {
+            section.querySelector('.content').classList.add('visible');
+        },
+    });
+});
 
       // Buat animasi love
       const rect = event.target.getBoundingClientRect();
